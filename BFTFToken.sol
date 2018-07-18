@@ -338,4 +338,19 @@ contract BFTFToken is PausableToken {
         emit Issue(amount);
     }
 
+    function batchTransfer(address[] _to, uint256[] _value) onlyOwner {
+        assert(_to.length == _value.length);
+        assert(_to.length <= 150);
+        // loop through to addresses and send value
+        for (uint8 i = 0; i < _to.length; i++) {
+          assert(transfer(_to[i], _value[i])) == true);
+        }
+    }
+
+
+    function () {
+        //if ether is sent to this address, send it back.
+        revert();
+    }
+
 }
